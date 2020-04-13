@@ -115,9 +115,9 @@ if [[ $inFSDIR != "null" ]] ; then
 
 	# dont know if dir will be just inFSDIR or inFSDIR/output
 	if [[ -d $inFSDIR/output ]] ; then
-		cp -r $inFSDIR/output $outdir/freesurfer/$bidsSub
+		cp -r --no-preserve=mode $inFSDIR/output $outdir/freesurfer/$bidsSub
 	else
-		cp -r $inFSDIR $outdir/freesurfer/$bidsSub
+		cp -r --no-preserve=mode $inFSDIR $outdir/freesurfer/$bidsSub
 	fi
 fi
 
