@@ -159,7 +159,7 @@ if [[ $inFMRI != "null" ]] ; then
 	name_FMRI=$bidsSubSesDir/func/$bidsSub
 	name_FMRI=$(bids_namekeyvals $name_FMRI fmri.json "task acq ce dir rec run echo" $ses )
 	cp $inFMRI ${name_FMRI}_bold.nii.gz
-	jq -r ".meta" fmri.json > ${name_FMRI}_bold.json
+	jq -r '.meta | del(.["datatype"])' fmri.json > ${name_FMRI}_bold.json
 	bids_phaseencode_check ${name_FMRI}_bold.json 
 
 fi
