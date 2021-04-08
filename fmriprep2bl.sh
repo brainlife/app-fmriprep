@@ -17,9 +17,9 @@ ses=$(jq -r '._inputs[] | select(.id == "fmri") | .meta.session' config.json)
 [ "$ses" != "null" ] && oDir=$oDir/ses-$ses
 
 mkdir -p regress
-regressors_tsv=$(find $oDir/func -name "*_desc-confounds_timeseries.tsv")
+regressors_tsv=$(find $oDir/func -name "*_desc-confounds_regressors.tsv")
 [[ -f $regressors_tsv ]] && cp $regressors_tsv regress/regressors.tsv
-regressors_json=$(find $oDir/func -name "*_desc-confounds_timeseries.json")
+regressors_json=$(find $oDir/func -name "*_desc-confounds_regressors.json")
 [[ -f $regressors_json ]] && cp $regressors_json regress/regressors.json
 
 # need to check if we have surface or volume output,
