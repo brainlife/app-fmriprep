@@ -97,7 +97,7 @@ if [ ! -d $outdir/fmriprep ]; then
 
     # TODO - I shouldn't set cifti-output if it's running in volume mode?
     time singularity exec -e \
-        docker://nipreps/fmriprep:20.2.1 \
+        docker://nipreps/fmriprep:20.0.7 \
         /usr/local/miniconda/bin/fmriprep \
         --notrack \
         --resource-monitor \
