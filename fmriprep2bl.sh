@@ -97,12 +97,12 @@ mv output_report/fmriprep output_report/html
 mkdir -p parcellation
 labelsTsv=$outdir/fmriprep/desc-aparcaseg_dseg.tsv
 cp ${labelsTsv} ./labels.tsv
-oDir=$outdir/fmriprep/sub-$sub
+#oDir=$outdir/fmriprep/sub-$sub
 ln -sf ../$(find $oDir/anat -name "*_desc-aparcaseg_dseg.nii.gz" -not -name "*space*") parcellation/parc.nii.gz
 
 ### transform/h5 datatype
 mkdir -p transform
-oDir=$outdir/fmriprep/sub-$sub
+#oDir=$outdir/fmriprep/sub-$sub
 ln -sf ../$(find $oDir/anat -name "*_from-T1w_to-${space}_mode-image_xfm.h5") transform/warp.h5
 ln -sf ../$(find $oDir/anat -name "*_from-${space}_to-T1w_mode-image_xfm.h5") transform/inverse-warp.h5
 ln -sf ../$(find $oDir/anat -name "*_from-T1w_to-*mode-image_xfm.txt") transform/affine.txt
