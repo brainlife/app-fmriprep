@@ -104,7 +104,7 @@ ln -sf ../$(find $oDir/anat -name "*_desc-aparcaseg_dseg.nii.gz" -not -name "*sp
 mkdir -p transform
 #oDir=$outdir/fmriprep/sub-$sub
 if [[ ${space} == 'T1w' ]]; then
-    space="fsnative"
+    space="MNI152NLin6Asym"
 fi
 ln -sf ../$(find $oDir/anat -name "*_from-T1w_to-${space}_mode-image_xfm.h5") transform/warp.h5
 ln -sf ../$(find $oDir/anat -name "*_from-${space}_to-T1w_mode-image_xfm.h5") transform/inverse-warp.h5
