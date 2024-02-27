@@ -124,7 +124,7 @@ time singularity exec -e \
     --omp-nthreads 16 \
     --nthreads 16 \
     --force-bbr \
-    --use-syn-sdc \
+    --use-syn-sdc warn \
     $aroma \
     $skipbidsvalidation \
     $fs_dir_line \
