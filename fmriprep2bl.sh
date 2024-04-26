@@ -58,8 +58,7 @@ else # else its a volume(bold) output
 
     # get the events.tsv file
     EVENTS=`jq -r '.events' config.json`
-    ln -sf $EVENTS bold_img/events.tsv
-
+    ln -sf ../$EVENTS bold_img/events.tsv
 
     # get the preproc fmri volmask
     mkdir -p bold_mask
