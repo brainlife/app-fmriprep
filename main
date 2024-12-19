@@ -104,33 +104,31 @@ export SINGULARITYENV_TEMPLATEFLOW_HOME=$PWD/templateflow
 [ -z "$FREESURFER_LICENSE" ] && echo "Please set FREESURFER_LICENSE in .bashrc" && exit 1;
 echo $FREESURFER_LICENSE > license.txt
 
-if [ ! -d $outdir/fmriprep ]; then
+#clean up previous workdir if it exists, otherwise cause problem rerunning job
+rm -rf $outdir/fmriprep
+rm -rf $WORKDIRNAME && mkdir -p $WORKDIRNAME
 
-    #clean up previous workdir if it exist
-    rm -rf $WORKDIRNAME && mkdir -p $WORKDIRNAME
-
-    # TODO - I shouldn't set cifti-output if it's running in volume mode?
-    time singularity exec -e \
-        docker://nipreps/fmriprep:20.2.3 \
-        /usr/local/miniconda/bin/fmriprep \
-        --notrack \
-        --resource-monitor \
-        --md-only-boilerplate \
-        --stop-on-first-crash \
-        --use-plugin=multi_proc.yml \
-        --output-spaces $output_space \
-        --cifti-output $cifti_output_resolution \
-        --omp-nthreads 16 \
-        --nthreads 16 \
-        --force-bbr \
-        --use-syn-sdc \
-        $aroma \
-        $skipbidsvalidation \
-        --skull-strip-template=NKI \
-        --work-dir=$WORKDIRNAME \
-        --fs-license-file=license.txt \
-        bids $outdir participant
-fi
+# TODO - I shouldn't set cifti-output if it's running in volume mode?
+time singularity exec -e \
+    docker://nipreps/fmriprep:20.2.3 \
+    /usr/local/miniconda/bin/fmriprep \
+    --notrack \
+    --resource-monitor \
+    --md-only-boilerplate \
+    --stop-on-first-crash \
+    --use-plugin=multi_proc.yml \
+    --output-spaces $output_space \
+    --cifti-output $cifti_output_resolution \
+    --omp-nthreads 16 \
+    --nthreads 16 \
+    --force-bbr \
+    --use-syn-sdc \
+    $aroma \
+    $skipbidsvalidation \
+    --skull-strip-template=NKI \
+    --work-dir=$WORKDIRNAME \
+    --fs-license-file=license.txt \
+    bids $outdir participant
 
 echo "done with fmriprep! - now organizing output"
 ./fmriprep2bl.sh
