@@ -113,7 +113,7 @@ rm -rf $WORKDIRNAME && mkdir -p $WORKDIRNAME
 
 # TODO - I shouldn't set cifti-output if it's running in volume mode?
 time singularity exec -e \
-    docker://nipreps/fmriprep:23.0.2 fmriprep \
+    docker://nipreps/fmriprep:24.1.1 fmriprep \
     --notrack \
     --resource-monitor \
     --md-only-boilerplate \
