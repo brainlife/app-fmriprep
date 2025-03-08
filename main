@@ -28,7 +28,7 @@ fi
 
 outdir=out
 
-#we should avoid using lustre filesystem as workdir on Expsnse@SDSC, 
+#we should avoid using lustre filesystem as workdir on Expsnse@SDSC,
 #admin told me that it's causing high IOP
 WORKDIRNAME=work
 if [ -d "/scratch/$USER/job_$SLURM_JOB_ID" ]; then
