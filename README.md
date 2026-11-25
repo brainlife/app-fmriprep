@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg" alt="MIT license"></a>
 </p>
 
-## 🧠 At a glance
+## At a glance
 
 <!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
 
@@ -20,14 +20,14 @@ Converts the inputs to BIDS and runs fMRIPrep 20.2.1 with boundary-based registr
 
 | | |
 |---|---|
-| 📥 **Inputs** | `neuro/anat/t1w` · `neuro/func/task` · `neuro/freesurfer` · `neuro/anat/t2w` (optional) · `neuro/fmap` (optional) |
-| 📤 **Outputs** | `neuro/regressors` · `neuro/anat/t1w` · `neuro/mask` · `report/html` · `neuro/cifti` · `neuro/surface/data` · `neuro/surface/vertices` |
-| 🐳 **Container** | `nipreps/fmriprep:20.2.1` |
-| ⚙️ **Resources** | 8 CPUs · 14 GB memory · 9 h walltime |
-| 🔑 **Requires** | `FREESURFER_LICENSE` |
-| 🔗 **Run it** | [doi.org/10.25663/brainlife.app.267](https://doi.org/10.25663/brainlife.app.267) |
+| **Inputs** | `neuro/anat/t1w` · `neuro/func/task` · `neuro/freesurfer` · `neuro/anat/t2w` (optional) · `neuro/fmap` (optional) |
+| **Outputs** | `neuro/regressors` · `neuro/anat/t1w` · `neuro/mask` · `report/html` · `neuro/cifti` · `neuro/surface/data` · `neuro/surface/vertices` |
+| **Container** | `nipreps/fmriprep:20.2.1` |
+| **Resources** | 8 CPUs · 14 GB memory · 9 h walltime |
+| **Requires** | `FREESURFER_LICENSE` |
+| **Run it** | [doi.org/10.25663/brainlife.app.267](https://doi.org/10.25663/brainlife.app.267) |
 
-#### 📥 Inputs
+#### Inputs
 
 | Input | Datatype | Required | Description |
 |---|---|---|---|
@@ -37,7 +37,7 @@ Converts the inputs to BIDS and runs fMRIPrep 20.2.1 with boundary-based registr
 | `t2w` | `neuro/anat/t2w` | no | Optional T2-weighted image of the same subject, added to the BIDS input for fMRIPrep. |
 | `fmap` | `neuro/fmap` | no | 2phasemag fieldmap is not yet supported by fmriprep (https://github.com/poldracklab/sdcflows/issues/15) - testing 1.5.2 should should support it. |
 
-#### 📤 Outputs
+#### Outputs
 
 | Output | Datatype | Description |
 |---|---|---|
@@ -50,7 +50,7 @@ Converts the inputs to BIDS and runs fMRIPrep 20.2.1 with boundary-based registr
 | `surface-vertices` | `neuro/surface/vertices` | surface vertices. only meaningful for fsnative. |
 
 <details>
-<summary><b>⚙️ Parameters</b> (2)</summary>
+<summary><b>Parameters</b> (2)</summary>
 
 | Parameter | Type | Default | Description |
 |---|---|---|---|
@@ -67,7 +67,7 @@ This App runs [fMRIPrep](https://github.com/nipreps/fmriprep) on brainlife.io. f
 
 The App converts its inputs to BIDS and runs fMRIPrep with boundary-based registration (`--force-bbr`), fieldmap-less SyN distortion correction (`--use-syn-sdc`) unless a fieldmap is provided, and the NKI skull-stripping template. See the [fMRIPrep documentation](https://fmriprep.readthedocs.io/en/stable/) for details of each step.
 
-## 🏷️ Versions on brainlife.io
+## Versions on brainlife.io
 
 Two Apps are built from this repository, one for each kind of output; each runs from its own branch.
 
@@ -78,9 +78,9 @@ Two Apps are built from this repository, one for each kind of output; each runs 
 
 Use the surface-output App when your analysis is surface- or grayordinate-based, and the volume-output App otherwise. The default branch (`master`) is a development version that runs fMRIPrep 24.1.1; it is not the code behind either registered App.
 
-## 🚀 Running the App
+## Running the App
 
-### ☁️ On brainlife.io
+### On brainlife.io
 
 Open the [surface-output](https://doi.org/10.25663/brainlife.app.267) or [volume-output](https://doi.org/10.25663/brainlife.app.160) App, choose the inputs from your project, set the options and press **Execute**.
 
@@ -99,7 +99,7 @@ Open the [surface-output](https://doi.org/10.25663/brainlife.app.267) or [volume
 - **`aroma`** (volume App): run ICA-AROMA to identify confounding time series related to head motion.
 - **`skipbidsvalidation`**: skip the BIDS validation of the input data. Try this if your data is not BIDS-compatible but you want fMRIPrep to process it anyway.
 
-### 💻 Locally
+### Locally
 
 You need [Singularity/Apptainer](https://apptainer.org/), [`jq`](https://jqlang.github.io/jq/), a [FreeSurfer license](https://surfer.nmr.mgh.harvard.edu/registration.html), and the `bl2bids` command on your `PATH` (`main` calls it to build the BIDS input from `config.json`). fMRIPrep runs from the `nipreps/fmriprep` container.
 
@@ -126,7 +126,7 @@ You need [Singularity/Apptainer](https://apptainer.org/), [`jq`](https://jqlang.
 
 `clean.sh` removes the outputs and working files of a previous run.
 
-## 📦 Outputs
+## Outputs
 
 The full fMRIPrep derivatives are written to `out/`. The App maps the main results to brainlife.io datatypes:
 
@@ -146,14 +146,14 @@ surface-vertices/  left and right surface vertices (only meaningful for fsnative
 cifti/             cifti.nii, the 91k grayordinate dtseries
 ```
 
-## 🩺 Troubleshooting
+## Troubleshooting
 
 - **`app needs minimally a T1w and fmri. exiting`**: provide both a T1w and an fMRI input.
 - **`Please set FREESURFER_LICENSE in .bashrc`**: no FreeSurfer license is available. Set `FREESURFER_LICENSE` when running locally; brainlife.io provides it automatically.
 - **Two-phase/magnitude (`2phasemag`) fieldmaps**: these were not supported by the fMRIPrep distortion-correction module ([sdcflows issue #15](https://github.com/poldracklab/sdcflows/issues/15)) when these Apps were built.
 - **Input fails BIDS validation**: set `skipbidsvalidation`.
 
-## 📚 Citing
+## Citing
 
 > [!TIP]
 > If you use this App in your work, please cite the App, the software it builds on and brainlife.io (below). GitHub's **Cite this repository** button gives the App citation in APA and BibTeX.
@@ -164,13 +164,13 @@ cifti/             cifti.nii, the 91k grayordinate dtseries
 - Hayashi S, Caron BA, Heinsfeld AS, et al. brainlife.io: a decentralized and open-source cloud platform to support neuroscience research. *Nature Methods* 21:809–813 (2024). [doi:10.1038/s41592-024-02237-2](https://doi.org/10.1038/s41592-024-02237-2)
 - Avesani P, McPherson B, Hayashi S, et al. The open diffusion data derivatives, brain data upcycling via integrated publishing of derivatives and reproducible open cloud services. *Scientific Data* 6:69 (2019). [doi:10.1038/s41597-019-0073-y](https://doi.org/10.1038/s41597-019-0073-y)
 
-## 👥 Authors
+## Authors
 
 - Josh Faskowitz ([@faskowit](https://github.com/faskowit))
 - Soichi Hayashi ([@soichih](https://github.com/soichih))
 - Franco Pestilli ([@francopestilli](https://github.com/francopestilli), project director)
 
-## 💰 Funding
+## Funding
 
 [![Wellcome-226486/Z/22/Z](https://img.shields.io/badge/Wellcome-226486%2FZ%2F22%2FZ-purple.svg)](https://wellcome.org/)
 [![NIH-NINDS-U24NS140384](https://img.shields.io/badge/NIH_NINDS-U24NS140384-green.svg)](https://reporter.nih.gov/project-details/11261037)
@@ -191,6 +191,6 @@ cifti/             cifti.nii, the 91k grayordinate dtseries
 
 This material is based upon work supported by the National Science Foundation Graduate Research Fellowship under Grant No. 1342962. Any opinion, findings, and conclusions or recommendations expressed in this material are those of the authors(s) and do not necessarily reflect the views of the National Science Foundation.
 
-## ⚖️ License
+## License
 
 [MIT](LICENSE). fMRIPrep is distributed under the [Apache License 2.0](https://github.com/nipreps/fmriprep/blob/master/LICENSE).
